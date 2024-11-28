@@ -70,7 +70,7 @@ def getMatchData(matchId):
 #gameid, totalGold, destroyedTowers, destroyedNexusTowers, destroyedInhibitors, dragons, barons, winTeam
 def saveData(data, filename):
     with open(filename, "w") as file:
-        file.write("gameid,totalGoldA,totalGoldB,destroyedTowersA,destroyedTowersB,destroyedNexusTowersA,destroyedNexusTowersB,destroyedInhibitorsA,destroyedInhibitorsB,dragonsA,dragonsB,baronsA,baronsB,winTeam\n")
+        file.write("gameid,totalGoldA,totalGoldB,destroyedTowersA,destroyedTowersB,destroyedInhibitorsA,destroyedInhibitorsB,dragonsA,dragonsB,baronsA,baronsB,winTeam\n")
         for match in data:
           gameid = match["info"]["gameId"]
           # Inicializar variáveis
