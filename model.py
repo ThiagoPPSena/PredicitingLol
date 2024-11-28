@@ -140,5 +140,6 @@ def randomForest():
     # Salvar o modelo treinado
     saveModel(bestModel, 'model.pkl')
 
-# Chamar a função principal
-randomForest()
+if __name__ == "__main__":
+    # Chamar a função principal
+    randomForest()

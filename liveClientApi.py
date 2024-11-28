@@ -3,6 +3,10 @@ import json
 import os
 from dotenv import load_dotenv
 import time
+import urllib3
+
+# Desativar avisos de segurança do urllib3
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 # Carregar a chave da API do arquivo .env
 load_dotenv()

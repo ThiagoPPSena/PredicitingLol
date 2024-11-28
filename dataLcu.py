@@ -111,4 +111,6 @@ def getAllData():
 
     
 
-print(getAllData())
+if __name__ == "__main__":
+  print(getAllData())
+  
