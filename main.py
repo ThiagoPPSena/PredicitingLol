@@ -16,8 +16,6 @@ X = data[
         "totalGoldB",
         "destroyedTowersA",
         "destroyedTowersB",
-        "destroyedNexusTowersA",
-        "destroyedNexusTowersB",
         "destroyedInhibitorsA",
         "destroyedInhibitorsB",
         "dragonsA",

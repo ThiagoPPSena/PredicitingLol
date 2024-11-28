@@ -77,7 +77,6 @@ def saveData(data, filename):
           #100 -> A, 200 -> B
           totalGold = {100: 0, 200: 0}
           destroyedTowers = {100: 0, 200: 0}
-          destroyedNexusTowers = {100: 0, 200: 0}
           destroyedInhibitors = {100: 0, 200: 0}
           dragons = {100: 0, 200: 0}
           barons = {100: 0, 200: 0}
@@ -87,8 +86,6 @@ def saveData(data, filename):
           for participant in match["info"]["participants"]:
               team_id = participant["teamId"]
               totalGold[team_id] += participant["goldEarned"]
-              if destroyedNexusTowers[team_id] == 0:
-                destroyedNexusTowers[team_id] = participant["challenges"]["hadOpenNexus"]
           
           # Obter informações de objetivos destruídos
           for team in match["info"]["teams"]:
@@ -101,7 +98,7 @@ def saveData(data, filename):
                   winTeam = team_id
           file.write(
             f"{gameid},{totalGold[100]},{totalGold[200]},{destroyedTowers[100]},{destroyedTowers[200]},"
-            f"{destroyedNexusTowers[100]},{destroyedNexusTowers[200]},{destroyedInhibitors[100]},{destroyedInhibitors[200]},"
+            f"{destroyedInhibitors[100]},{destroyedInhibitors[200]},"
             f"{dragons[100]},{dragons[200]},{barons[100]},{barons[200]},{0 if winTeam == 100 else 1}\n")
 
 def main():

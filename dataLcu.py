@@ -41,24 +41,6 @@ def getTowersDestroyed(realTimeData):
         towersDestroyed[200] += 1
   return (towersDestroyed[100],towersDestroyed[200])
 
-def hadNexusTowersDestroyed(realTimeData):
-  allPlayers = realTimeData['allPlayers']
-  AllEvents = realTimeData['events']['Events']
-  nexusTowersDestroyed = {100: 0, 200: 0}
-  for event in AllEvents:
-    if event['EventName'] == 'TurretKilled':
-      #Turret_<EQUIPE>_<FAIXA>_<NUMERO>_<SUFIXO>
-      # T1/T2 L/C/R 03/02/01/05 A/other
-      team = event['TurretKilled'][7:9] # T1 / T2
-      #Turret_T2_C_02_A
-      towerNexus = event['TurretKilled'][10:16] # C_01_A
-
-      if team == 'T2' and (towerNexus == 'C_01_A' or towerNexus == 'C_02_A'):
-        nexusTowersDestroyed[100] += 1
-      elif team == 'T1' and (towerNexus == 'C_01_A' or towerNexus == 'C_02_A'):
-        nexusTowersDestroyed[200] += 1
-  return (1 if nexusTowersDestroyed[100] >= 2 else 0, 1 if nexusTowersDestroyed[200] >= 2 else 0)
-
 def getInhibitorsDestroyed(realTimeData):
   allPlayers = realTimeData['allPlayers']
   AllEvents = realTimeData['events']['Events']
@@ -108,7 +90,6 @@ def getAllData():
   
   totalGold = getGoldTeam(realTimeData)
   towersDestroyed = getTowersDestroyed(realTimeData)
-  nexusTowersDestroyed = hadNexusTowersDestroyed(realTimeData)
   inhibitorsDestroyed = getInhibitorsDestroyed(realTimeData)
   dragonsKilled = getDragonsKilled(realTimeData)
   baronsKilled = getBaronsKilled(realTimeData)
@@ -118,8 +99,6 @@ def getAllData():
     "totalGoldB": totalGold[1],
     "destroyedTowersA": towersDestroyed[0],
     "destroyedTowersB": towersDestroyed[1],
-    "destroyedNexusTowersA": nexusTowersDestroyed[0],
-    "destroyedNexusTowersB": nexusTowersDestroyed[1],
     "destroyedInhibitorsA": inhibitorsDestroyed[0],
     "destroyedInhibitorsB": inhibitorsDestroyed[1],
     "dragonsA": dragonsKilled[0],
