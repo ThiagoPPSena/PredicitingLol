@@ -1,0 +1,7 @@
+Dados necessários
+- Ouro total pra cada time
+- Torres destruidas
+- Torres do nexus destruida
+- Inibidores destruidos
+- Número de dragoões, barões
+Extras: Primeira kill, primeira torre, primeiro inibidor
