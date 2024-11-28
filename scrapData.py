@@ -25,6 +25,7 @@ def getTopPlayers():
         return []
 
 def getPUUID(summonerId):
+    time.sleep(0.1)
     url = f"{BASE_URL}/lol/summoner/v4/summoners/{summonerId}"
     response = requests.get(url, headers=HEADERS)
     if response.status_code == 200:
@@ -55,8 +56,8 @@ def getMatchIds(puuid):
         return None
 
 def getMatchData(matchId):
-    url = f"{REGION_URL}/lol/match/v5/matches/{matchId}"
     time.sleep(0.1)
+    url = f"{REGION_URL}/lol/match/v5/matches/{matchId}"
     response = requests.get(url, headers=HEADERS)
     if response.status_code == 200:
         data = response.json()
@@ -86,7 +87,8 @@ def saveData(data, filename):
           for participant in match["info"]["participants"]:
               team_id = participant["teamId"]
               totalGold[team_id] += participant["goldEarned"]
-              destroyedNexusTowers[team_id] = participant["challenges"]["hadOpenNexus"]
+              if destroyedNexusTowers[team_id] == 0:
+                destroyedNexusTowers[team_id] = participant["challenges"]["hadOpenNexus"]
           
           # Obter informações de objetivos destruídos
           for team in match["info"]["teams"]:
@@ -100,7 +102,7 @@ def saveData(data, filename):
           file.write(
             f"{gameid},{totalGold[100]},{totalGold[200]},{destroyedTowers[100]},{destroyedTowers[200]},"
             f"{destroyedNexusTowers[100]},{destroyedNexusTowers[200]},{destroyedInhibitors[100]},{destroyedInhibitors[200]},"
-            f"{dragons[100]},{dragons[200]},{barons[100]},{barons[100]},{0 if winTeam == 200 else 1}\n")
+            f"{dragons[100]},{dragons[200]},{barons[100]},{barons[200]},{0 if winTeam == 100 else 1}\n")
 
 def main():
   # Buscar os summonerIds dos top players do servidor
