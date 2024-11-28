@@ -5,9 +5,23 @@ import pandas as pd
 import numpy as np
 from sklearn.preprocessing import MinMaxScaler
 import matplotlib.pyplot as plt
+import joblib
+
+def saveModel(model, filePath):
+    """Salva o modelo treinado em um arquivo."""
+    joblib.dump(model, filePath)
+    print(f"Modelo salvo em {filePath}.")
+
+def loadModel(filePath):
+    """Carrega um modelo salvo."""
+    model = joblib.load(filePath)
+    print(f"Modelo carregado de {filePath}.")
+    return model
 
 def preProcessing():
     data = pd.read_csv('matches.csv')
+
+    data = data.drop(columns=['matchid'])
 
     # Inicializando o MinMaxScaler
     scaler = MinMaxScaler()
@@ -122,6 +136,9 @@ def randomForest():
     dispTest.plot(cmap=plt.cm.Blues)
     plt.title("Matriz de Confusão (Teste)")
     plt.show()
+
+    # Salvar o modelo treinado
+    saveModel(bestModel, 'model.pkl')
 
 # Chamar a função principal
 randomForest()
