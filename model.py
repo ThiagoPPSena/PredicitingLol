@@ -126,6 +126,8 @@ def randomForest():
     print("Validação cruzada com o melhor modelo:")
     validation(bestModel, featuresTrain, outputTrain)
 
+    bestModel.fit(featuresTrain, outputTrain)
+
     # Avaliar no conjunto de teste
     print("Avaliando no conjunto de teste...")
     outputPred = bestModel.predict(featuresTest)
